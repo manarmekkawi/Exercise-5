@@ -1,4 +1,4 @@
-//  Functions
+ //  Functions
 function getStudent(id) {
   let student = { id: id };
 
@@ -100,10 +100,6 @@ function resetForm() {
 
   registerForm.setAttribute("data-type", "add");
   cancelEditIcon.style.display="none";
-
-  document.querySelectorAll(".btn-danger").forEach(function (btn) {
-  btn.disabled = false;
-});
 }
 function updateLocalStorage() {
   localStorage.setItem("students", JSON.stringify(students));
@@ -126,9 +122,11 @@ function getStudentIndex(id) {
   return students.findIndex((student) => student.id == id);
 }
 function deleteStudent(id, that) {
-  // let studentIndex=students.findIndex(function(student){
-  //         return student.id===id;                               //first way with normal function
-  //
+   
+  if (registerForm.dataset.type === "edit") {
+  alert("Finish editing before deleting a student.");
+  return;
+}
 
   // to confirm message
   if (!confirm("Are you sure?")) {
@@ -173,10 +171,6 @@ function insertEditStudentIntoForm(id) {
   registerForm.setAttribute("data-type", "edit");
   registerForm.setAttribute("data-student-id", id);
   cancelEditIcon.style.display="inline-block";
-
-  document.querySelectorAll(".btn-danger").forEach(function (btn) {
-  btn.disabled = true;
-});
 }
 
 function editStudent() {
