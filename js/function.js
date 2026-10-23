@@ -174,13 +174,9 @@ function insertEditStudentIntoForm(id) {
   registerForm.setAttribute("data-student-id", id);
   cancelEditIcon.style.display="inline-block";
 
-  let deleteBtn = document.querySelector(
-  `tr[data-student-id="${id}"] .btn-danger`
-);
-
-if (deleteBtn) {
-  deleteBtn.disabled = true;
-}
+  document.querySelectorAll(".btn-danger").forEach(function (btn) {
+  btn.disabled = true;
+});
 }
 
 function editStudent() {
